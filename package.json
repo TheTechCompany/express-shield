@@ -1,8 +1,11 @@
 {
-  "name": "express-shield",
+  "name": "@thetechcompany/express-shield",
   "version": "0.0.12",
   "description": "OAuth for Express. Simple. Secure. Beautiful.",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "files": [
+    "lib/"
+  ],
   "scripts": {
     "test": "mocha --require test/support/env --bail --check-leaks test/",
     "test-dev": "nodemon --exec 'clear && (yarn test || exit 1)'",
@@ -22,12 +25,15 @@
     "type-is": "1.6.15"
   },
   "devDependencies": {
+    "@types/basic-auth": "^1.1.3",
+    "@types/type-is": "^1.6.3",
     "body-parser": "^1.19.0",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "express": "^4.17.1",
     "mocha": "^7.0.0",
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.2",
+    "typescript": "^4.3.5"
   },
   "engines": {
     "node": ">=13.5.0"
