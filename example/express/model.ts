@@ -1,5 +1,5 @@
-const crypto = require('crypto')
-const db = { // Here is a fast overview of what your db model should look like
+import crypto from 'crypto'
+let db : any = { // Here is a fast overview of what your db model should look like
   authorizationCode: {
     authorizationCode: '', // A string that contains the code
     expiresAt: new Date(), // A date when the code expires
@@ -23,10 +23,10 @@ const db = { // Here is a fast overview of what your db model should look like
   },
 }
 
-const DebugControl = require('./express/utilities/debug.js')
+import DebugControl from './utilities/debug'
 
-module.exports = {
-  getClient: function (clientId, clientSecret) {
+export default {
+  getClient: function (clientId: any, clientSecret: any) {
     // query db for details with client
     log({
       title: 'Get Client',
@@ -55,7 +55,7 @@ module.exports = {
   //   })
   //
   // },
-  saveToken: (token, client, user) => {
+  saveToken: (token: { accessToken: any; accessTokenExpiresAt: any; refreshToken: any; refreshTokenExpiresAt: any }, client: any, user: any) => {
     /* This is where you insert the token into the database */
     log({
       title: 'Save Token',
@@ -76,7 +76,7 @@ module.exports = {
     return new Promise(resolve => resolve(db.token))
 
   },
-  getAccessToken: token => {
+  getAccessToken: (token: string) => {
     /* This is where you select the token from the database where the code matches */
     log({
       title: 'Get Access Token',
@@ -87,7 +87,7 @@ module.exports = {
     if (!token || token === 'undefined') return false
     return new Promise(resolve => resolve(db.token))
   },
-  getRefreshToken: token => {
+  getRefreshToken: (token: any) => {
     /* Retrieves the token from the database */
     log({
       title: 'Get Refresh Token',
@@ -98,7 +98,7 @@ module.exports = {
     DebugControl.log.variable({ name: 'db.token', value: db.token })
     return new Promise(resolve => resolve(db.token))
   },
-  revokeToken: token => {
+  revokeToken: (token: string) => {
     /* Delete the token from the database */
     log({
       title: 'Revoke Token',
@@ -109,7 +109,7 @@ module.exports = {
     if (!token || token === 'undefined') return false
     return new Promise(resolve => resolve(true))
   },
-  generateAuthorizationCode: (client, user, scope) => {
+  generateAuthorizationCode: (client: any, user: any, scope: any) => {
     /*
     For generating custom codes
     */
@@ -129,7 +129,7 @@ module.exports = {
       .digest('hex')
     return code
   },
-  saveAuthorizationCode: (code, client, user) => {
+  saveAuthorizationCode: (code: { authorizationCode: any; expiresAt: any; redirectUri: any }, client: any, user: any) => {
     /* This is where you store the access code data into the database */
     log({
       title: 'Save Authorization Code',
@@ -149,7 +149,7 @@ module.exports = {
       redirectUri: `${code.redirectUri}`,
     }, db.authorizationCode)))
   },
-  getAuthorizationCode: authorizationCode => {
+  getAuthorizationCode: (authorizationCode: any) => {
     /* this is where we fetch the stored data from the code */
     log({
       title: 'Get Authorization code',
@@ -161,7 +161,7 @@ module.exports = {
       resolve(db.authorizationCode)
     })
   },
-  revokeAuthorizationCode: authorizationCode => {
+  revokeAuthorizationCode: (authorizationCode: any) => {
     /* This is where we delete codes */
     log({
       title: 'Revoke Authorization Code',
@@ -179,7 +179,7 @@ module.exports = {
     const codeWasFoundAndDeleted = true  // Return true if code found and deleted, false otherwise
     return new Promise(resolve => resolve(codeWasFoundAndDeleted))
   },
-  verifyScope: (token, scope) => {
+  verifyScope: (token: any, scope: any) => {
     /* This is where we check to make sure the client has access to this scope */
     log({
       title: 'Verify Scope',
@@ -193,7 +193,7 @@ module.exports = {
   }
 }
 
-function log({ title, parameters }) {
+function log({ title, parameters }: any) {
   DebugControl.log.functionName(title)
   DebugControl.log.parameters(parameters)
 }

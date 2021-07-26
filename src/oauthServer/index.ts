@@ -73,8 +73,8 @@ export class OAuth {
   }
 }
 
-import {Request} from './request'
-import {Response} from './response'
+import Request from './request'
+import Response from './response'
 import * as Errors from './errors'
 
 export {

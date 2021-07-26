@@ -20,7 +20,7 @@ const save = async (user: any, client: any, providedScope: any, model: { saveTok
   return await model.saveToken(token, client, user)
 }
 
-const clientCredentials = async (req: { body: { scope: any } },client: any, {model, accessTokenLifetime}: any) => {
+export const clientCredentials = async (req: { body: { scope: any } },client: any, {model, accessTokenLifetime}: any) => {
   shared.verify(model)
   const {
     getUserFromClient,
@@ -33,5 +33,3 @@ const clientCredentials = async (req: { body: { scope: any } },client: any, {mod
   if(!user) throw new InvalidGrantError('User Credentials are invalid')
   return await save(user, client, scope, model, accessTokenLifetime)
 }
-
-module.exports = clientCredentials

@@ -1,7 +1,8 @@
-const OAuthServer = require('../../../lib').Express
-const model = require('../../model')
+import {Express as OAuthServer} from '../../../lib'
+import model from '../model'
 
-module.exports = new OAuthServer({
+
+export default new OAuthServer({
   oauthOptions: {
     model: model,
     grants: ['authorization_code', 'refresh_token'],

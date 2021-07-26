@@ -7,13 +7,15 @@
     "lib/"
   ],
   "scripts": {
+    "build": "tsc -b",
+    "example": "ts-node example/express/app.ts",
     "test": "mocha --require test/support/env --bail --check-leaks test/",
     "test-dev": "nodemon --exec 'clear && (yarn test || exit 1)'",
     "test-express-example": "mocha example/express/tests/**/*.js --exit"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/14gasher/express-shield"
+    "url": "https://github.com/TheTechCompany/express-shield"
   },
   "keywords": [
     "OAuth2.0",
@@ -33,6 +35,7 @@
     "express": "^4.17.1",
     "mocha": "^7.0.0",
     "nodemon": "^2.0.2",
+    "ts-node": "^10.1.0",
     "typescript": "^4.3.5"
   },
   "engines": {

@@ -7,25 +7,25 @@ const levels = {
 
 let level = levels.HIGH
 
-module.exports = {
+export default {
   levels,
-  setLevel: l => level = l,
+  setLevel: (l: number) => level = l,
   log: {
-    parameters: parameters => {
+    parameters: (parameters: any[]) => {
       if(levels.HIGH > level) return
       console.group()
-      parameters.forEach(p => console.log(`${p.name}:`, p.value))
+      parameters.forEach((p: { name: any; value: any }) => console.log(`${p.name}:`, p.value))
       console.groupEnd()
     },
-    functionName: name => {
+    functionName: (name: any) => {
       if(levels.MEDIUM > level) return
       console.log(`\nEXECUTING: ${name}\n`)
     },
-    flow: flow => {
+    flow: (flow: any) => {
       if(levels.LOW > level) return
       console.log(`\n\n\nBEGIN FLOW: ${flow}\n\n\n`)
     },
-    variable: ({name, value}) => {
+    variable: ({name, value}: any) => {
       if(levels.HIGH > level) return
       console.group()
       console.group()
@@ -33,7 +33,7 @@ module.exports = {
       console.groupEnd()
       console.groupEnd()
     },
-    request: () => (req,res,next) => {
+    request: () => (req: { url: any; query: any; body: any },res: any,next: () => any) => {
       if(levels.HIGH > level) return next()
       console.log('Hit URL', req.url, 'with following:')
       console.group()

@@ -18,5 +18,3 @@ export const handleGrant = async (req: { body: { grant_type: any } }, client: { 
     alwaysIssueNewRefreshToken,
   })
 }
-
-module.exports = handleGrant

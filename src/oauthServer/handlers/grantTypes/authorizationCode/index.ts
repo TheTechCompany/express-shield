@@ -7,7 +7,7 @@ import {validateUri} from './validateUri'
 import {revokeCode} from './revokeCode'
 import saveAndValidateToken from './saveToken'
 
-const authorizationCode = async (req: any, client: { id: any }, options: { model: any; accessTokenLifetime: any; refreshTokenLifetime: any }) => {
+export const authorizationCode = async (req: any, client: { id: any }, options: { model: any; accessTokenLifetime: any; refreshTokenLifetime: any }) => {
   shared.verify(options)
   const {
     model,
@@ -29,5 +29,3 @@ const authorizationCode = async (req: any, client: { id: any }, options: { model
   await revokeCode(code, model)
   return await saveAndValidateToken(code.user, client, code.authorizationCode, code.scope, model, accessTokenLifetime, refreshTokenLifetime)
 }
-
-module.exports = authorizationCode

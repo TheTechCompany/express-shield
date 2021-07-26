@@ -63,7 +63,7 @@ const save = async (user: any, client: any, providedScope: any, model: { saveTok
   return await model.saveToken(token, client, user)
 }
 
-const refreshToken = async (req: any, client: any, options: { model: any; alwaysIssueNewRefreshToken: any; refreshTokenLifetime: any; accessTokenLifetime: any }) => {
+export const refreshToken = async (req: any, client: any, options: { model: any; alwaysIssueNewRefreshToken: any; refreshTokenLifetime: any; accessTokenLifetime: any }) => {
   shared.verify(options)
   const {
     model,
@@ -83,5 +83,3 @@ const refreshToken = async (req: any, client: any, options: { model: any; always
   await revoke(token, revokeToken, alwaysIssueNewRefreshToken)
   return await save(token.user, client, token.scope, model, accessTokenLifetime, refreshTokenLifetime, alwaysIssueNewRefreshToken)
 }
-
-module.exports = refreshToken

@@ -1,8 +1,9 @@
 
 
-export class Response {
+export default class Response {
   headers: any
   status?: number
+  body: any
   constructor({
     body = {},
     headers = {},
@@ -33,5 +34,3 @@ export class Response {
     this.headers[field.toLowerCase()] = value
   }
 }
-
-module.exports = Response

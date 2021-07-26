@@ -48,5 +48,3 @@ export const authorizeHandler = async (req: any, res: any, {
   }
   return code
 }
-
-module.exports = authorizeHandler

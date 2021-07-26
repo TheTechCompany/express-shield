@@ -1,8 +1,8 @@
-const path = require('path') // has path and __dirname
-const express = require('express')
-const oauthServer = require('../oauth/server.js')
+import path from 'path' // has path and __dirname
+import express from 'express'
+import oauthServer from '../oauth/server'
 
-const DebugControl = require('../utilities/debug.js')
+import DebugControl from '../utilities/debug'
 
 
 const router = express.Router() // Instantiate a new router
@@ -14,7 +14,7 @@ router.get('/', (req,res) => {  // send back a simple form for the oauth
 })
 
 
-router.post('/authorize', (req,res,next) => {
+router.post('/authorize', (req: { body: { [x: string]: any; user?: any; username?: any; password?: any } },res: { redirect: (arg0: string) => void },next: () => void) => {
   DebugControl.log.flow('Initial User Authentication')
   const {username, password} = req.body
   if(username === 'username' && password === 'password') {
@@ -31,12 +31,12 @@ router.post('/authorize', (req,res,next) => {
     .map(a => `${a}=${req.body[a]}`)
     .join('&')
   return res.redirect(`/oauth?success=false&${params}`)
-}, (req,res, next) => { // sends us to our redirect with an authorization code in our url
+}, (req: any,res: any, next: () => void) => { // sends us to our redirect with an authorization code in our url
   DebugControl.log.flow('Authorization')
   return next()
 }, oauthServer.authorize({
   authenticateHandler: {
-    handle: req => {
+    handle: (req: { body: { [x: string]: any; user?: any } }) => {
       DebugControl.log.functionName('Authenticate Handler')
       DebugControl.log.parameters(Object.keys(req.body).map(k => ({name: k, value: req.body[k]})))
       return req.body.user
@@ -44,7 +44,7 @@ router.post('/authorize', (req,res,next) => {
   }
 }))
 
-router.post('/token', (req,res,next) => {
+router.post('/token', (req: any,res: any,next: () => void) => {
   DebugControl.log.flow('Token')
   next()
 },oauthServer.token({
@@ -53,5 +53,4 @@ router.post('/token', (req,res,next) => {
   },
 }))  // Sends back token
 
-
-module.exports = router
+export default router;

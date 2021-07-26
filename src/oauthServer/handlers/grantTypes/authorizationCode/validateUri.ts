@@ -7,5 +7,3 @@ export const validateUri = (req: { body: { redirect_uri: any }; query: { redirec
   if (!verifier.isUri(redirectUri)) throw new InvalidRequestError('`redirect_uri` is invalid')
   if (redirectUri != code.redirectUri) throw new InvalidRequestError('`redirect_uri` is invalid')
 }
-
-module.exports = validateUri

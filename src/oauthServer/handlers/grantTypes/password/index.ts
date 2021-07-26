@@ -62,4 +62,4 @@ const password = async (req: any, client: any, options: { model: any; accessCode
   return await save(user, client, scope, model, accessCodeLifetime, refreshCodeLifetime)
 }
 
-module.exports = password
+export default password

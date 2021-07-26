@@ -7,4 +7,3 @@ export const getScope = (req: any) => {
   return scope
 }
 
-module.exports = getScope

@@ -21,5 +21,3 @@ export const getTokenFromRequest = (req: any, allowBearerTokensInQueryString: bo
 
   throw new UnauthorizedRequestError('No authentication given','No authentication given (checked in header, body, and query). Please authenticate with one of those.')
 }
-
-module.exports = getTokenFromRequest

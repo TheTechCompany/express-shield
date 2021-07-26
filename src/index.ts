@@ -1,7 +1,7 @@
-import {ExpressWrapper as Express} from './expressWrapper'
-import {OAuth} from './oauthServer'
+import ExpressWrapper from './expressWrapper'
+import {Server} from './oauthServer'
 
 export {
-  Express,
-  OAuth,
+  ExpressWrapper as Express,
+  Server as OAuth,
 }

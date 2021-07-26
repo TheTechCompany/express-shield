@@ -4,7 +4,7 @@ import {
 
 import typeis from 'type-is'
 
-export class Request {
+export default class Request {
   headers: any
   constructor({
     headers,
@@ -44,5 +44,3 @@ export class Request {
     return typeis(this as any,t)
   }
 }
-
-module.exports = Request

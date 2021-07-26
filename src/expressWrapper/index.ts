@@ -6,7 +6,7 @@ import {
 } from '../oauthServer'
 import { UnauthorizedRequestError } from '../oauthServer/errors'
 
-export class ExpressWrapper {
+export default class ExpressWrapper {
   server: OAuth
   useErrorHandler: any
   continueMiddleware: any
@@ -20,7 +20,8 @@ export class ExpressWrapper {
     this.continueMiddleware = continueMiddleware
   }
 
-  handleErrorResponse(e: { code: any; name: any; message: any }, res: { set: (arg0: any) => void; status: (arg0: any) => { (): any; new(): any; send: { (arg0: { error: any; error_description: any } | null): any; new(): any } } }, next: (arg0: any) => any, response: Response) {
+  handleErrorResponse(e: any, res: any, next: any, response: Response) {
+    console.log("Error" ,e)
     if (this.useErrorHandler) return next(e)
     if (response) res.set(response.headers)
     return res
@@ -42,7 +43,7 @@ export class ExpressWrapper {
     return res.status(response.status).send(response.body)
   }
 
-  authenticate(options: any) {
+  authenticate(options?: any) {
     return async (req: any,res: any,next: () => any) => {
       const request = new Request(req)
       const response = new Response(res)
@@ -57,7 +58,7 @@ export class ExpressWrapper {
     }
   }
 
-  authorize(options: any) {
+  authorize(options?: any) {
     return async (req: any,res: any,next: () => any) => {
       const request = new Request(req)
       const response = new Response(res)
@@ -89,5 +90,3 @@ export class ExpressWrapper {
     }
   }
 }
-
-module.exports = ExpressWrapper

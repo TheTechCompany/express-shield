@@ -4,14 +4,14 @@ export const captureErrorTrace = (errInstance: object, errClass: Function | unde
 
 export class OAuthError extends Error {
   code: number
-  status: number
-  statusCode: number
+  status?: number
+  statusCode?: number
   extendedMessage?: any
   constructor(err: Error | string, properties: {code: number, name: string, extendedMessage?: string} = { code: 500, name: 'OAuthError', extendedMessage: '' }) {
     const msg = err instanceof Error ? err.message : err
     super(msg.toString())
     Object.assign(this, properties)
-    this.code = this.status = this.statusCode = properties.code
+    this.code = this.status || this.statusCode || properties.code
     if (!this.extendedMessage) this.extendedMessage = msg
     captureErrorTrace(this, OAuthError)
   }

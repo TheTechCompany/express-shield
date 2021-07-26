@@ -37,5 +37,3 @@ export const tokenHandler = async (req: any ,res: any, {
   const tokenType = getTokenType(tokenModel)
   updateSuccessResponse(res, tokenType)
 }
-
-module.exports = tokenHandler
